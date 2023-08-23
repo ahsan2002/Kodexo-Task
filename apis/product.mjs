@@ -5,7 +5,7 @@ import mongoose from 'mongoose';
 const router = express.Router();
 
 
-router.post('/product', (req, res) => {
+router.post('/transactions', (req, res) => {
 
     const body = req.body;
 
@@ -43,7 +43,7 @@ router.post('/product', (req, res) => {
                 console.log(saved);
 
                 res.send({
-                    message: "product added successfully"
+                    message: "transaction added successfully"
                 });
             } else {
                 res.status(500).send({
@@ -54,7 +54,7 @@ router.post('/product', (req, res) => {
 
 })
 
-router.get('/products', (req, res) => {
+router.get('/alltransactions', (req, res) => {
     const userId = new mongoose.Types.ObjectId(req.body.token._id);
     productModel.find({owner:userId},{},
         {
@@ -65,7 +65,7 @@ router.get('/products', (req, res) => {
          (err, data) => {
         if (!err) {
             res.send({
-                message: "got all products successfully",
+                message: "got all transactions successfully",
                 data: data
             })
         } else {
@@ -76,54 +76,54 @@ router.get('/products', (req, res) => {
     });
 })
 
-router.get('/product/:id', (req, res) => {
+// router.get('/product/:id', (req, res) => {
 
-    const id = req.params.id;
+//     const id = req.params.id;
 
-    // let isFound = false;
-    // for (let i = 0; i < products.length; i++) {
+//     // let isFound = false;
+//     // for (let i = 0; i < products.length; i++) {
 
-    //     if (products[i].id === id) {
-    //         res.send({
-    //             message: `get product by id: ${products[i].id} success`,
-    //             data: products[i]
-    //         });
+//     //     if (products[i].id === id) {
+//     //         res.send({
+//     //             message: `get product by id: ${products[i].id} success`,
+//     //             data: products[i]
+//     //         });
 
-    //         isFound = true
-    //         break;
-    //     }
-    // }
-    // if (isFound === false) {
-    //     res.status(404)
-    //     res.send({
-    //         message: "product not found"
-    //     });
-    // }
-    // return;
+//     //         isFound = true
+//     //         break;
+//     //     }
+//     // }
+//     // if (isFound === false) {
+//     //     res.status(404)
+//     //     res.send({
+//     //         message: "product not found"
+//     //     });
+//     // }
+//     // return;
 
-    productModel.findOne({ _id: id }, (err, data) => {
-        if (!err) {
-            if (data) {
-                res.send({
-                    message: `get product by id: ${data._id} success`,
-                    data: data
-                });
-            } else {
-                res.status(404).send({
-                    message: "product not found",
-                })
-            }
-        } else {
-            res.status(500).send({
-                message: "server error"
-            })
-        }
-    });
+//     productModel.findOne({ _id: id }, (err, data) => {
+//         if (!err) {
+//             if (data) {
+//                 res.send({
+//                     message: `get product by id: ${data._id} success`,
+//                     data: data
+//                 });
+//             } else {
+//                 res.status(404).send({
+//                     message: "product not found",
+//                 })
+//             }
+//         } else {
+//             res.status(500).send({
+//                 message: "server error"
+//             })
+//         }
+//     });
 
 
-})
+// })
 
-router.delete('/product/:id', (req, res) => {
+router.delete('/transaction/:id', (req, res) => {
     const id = req.params.id;
 
     // let isFound = false;
@@ -151,12 +151,12 @@ router.delete('/product/:id', (req, res) => {
 
             if (deletedData.deletedCount !== 0) {
                 res.send({
-                    message: "Product has been deleted successfully",
+                    message: "transaction has been deleted successfully",
                 })
             } else {
                 res.status(404);
                 res.send({
-                    message: "No Product found with this id: " + id,
+                    message: "No transaction found with this id: " + id,
                 });
             }
         } else {
@@ -168,7 +168,7 @@ router.delete('/product/:id', (req, res) => {
 
 })
 
-router.put('/product/:id', async (req, res) => {
+router.put('/transaction/:id', async (req, res) => {
 
     const body = req.body;
     const id = req.params.id;
@@ -227,7 +227,7 @@ router.put('/product/:id', async (req, res) => {
         console.log('updated: ', data);
 
         res.send({
-            message: "product modified successfully"
+            message: "transaction modified successfully"
         });
 
     } catch (error) {

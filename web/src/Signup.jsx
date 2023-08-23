@@ -67,7 +67,7 @@ function Signup() {
 
 
 
-      axios.post(`${baseUrl}/api/v1/signup`, {
+      axios.post(`${baseUrl}/api/v1/register`, {
         firstName: values.firstName,
         lastName: values.lastName,
         email: values.Email,

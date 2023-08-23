@@ -22,7 +22,7 @@ function Product() {
 
   const getAllProducts = async () => {
     try {
-      const response = await axios.get(`${baseUrl}/api/v1/products`)
+      const response = await axios.get(`${baseUrl}/api/v1/alltransactions`)
       console.log("response: ", response.data);
 
       setProducts(response.data.data)
@@ -34,7 +34,7 @@ function Product() {
 
   const deleteProduct = async (id) => {
     try {
-      const response = await axios.delete(`${baseUrl}/api/v1/product/${id}`)
+      const response = await axios.delete(`${baseUrl}/api/v1/transaction/${id}`)
       console.log("response: ", response.data);
 
       setLoadProduct(!loadProduct)
@@ -91,7 +91,7 @@ function Product() {
       console.log("values: ", values);
       myFormik.resetForm({ values: '' });
 
-      axios.post(`${baseUrl}/api/v1/product`, {
+      axios.post(`${baseUrl}/api/v1/transactions`, {
         name: values.transactionName,
         price: values.amount,
         description: values.description,
@@ -137,7 +137,7 @@ function Product() {
       console.log("values: ", values);
       setupdate(false);
 
-      axios.put(`${baseUrl}/api/v1/product/${editingProduct._id}`, {
+      axios.put(`${baseUrl}/api/v1/transaction/${editingProduct._id}`, {
         name: values.transactionName,
         price: values.amount,
         description: values.description,

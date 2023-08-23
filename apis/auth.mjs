@@ -10,7 +10,7 @@ const SECRET = process.env.SECRET || "topsecret";
 
 const router = express.Router()
 
-router.post("/signup", (req, res) => {
+router.post("/register", (req, res) => {
 
     let body = req.body;
 
